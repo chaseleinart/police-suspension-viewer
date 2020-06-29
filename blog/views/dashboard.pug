@@ -4,7 +4,15 @@ block variables
   - var title = "Dashboard"
 
 block content
-  
+  .row
+    .offset-sm-2.col-sm-8
+      form(method="post")
+        .form-group
+          label(for="state") State
+          input.form-control#title(type="text", name="state", placeholder="State", required)
+          button.btn.btn-primary.submit-btn(type="submit") Submit
+
+
   .row
     table(style='width:100%', border='1')
       tr
@@ -25,18 +33,4 @@ block content
               a(entry.year_decertified, state=entry.year_decertified)= entry.year_decertified
             td 
               a(href=entry.source, source=entry.source)= entry.source
-            
-
-
-  .row
-    .offset-sm-2.col-sm-8
-      h2.your-posts Police Data
-      ul.edit
-        each entry in entries
-          li
-            a(href="/" + entry.name, name=entry.name)= entry.name
-            a(href="/" + entry.state, state=entry.state)= entry.state
-            a(href="/" + entry.agency, name=entry.agency)= entry.agency
-            a(href="/" + entry.year_decertified, state=entry.year_decertified)= entry.year_decertified
-            
 

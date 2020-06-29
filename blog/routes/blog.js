@@ -36,6 +36,9 @@ router.get("/", (req, res) => {
 // Render the user dashboard
 router.get("/dashboard", (req, res, next) => {
   models.Entry.findAll({
+    where: {
+      state: "New Hampshire"
+    }
   }).then(entries => {
     let entryData = [];
     entries.forEach(entry => {
@@ -45,8 +48,23 @@ router.get("/dashboard", (req, res, next) => {
   });
 });
 
-// Create a new entry
 router.post("/dashboard", (req, res, next) => {
+  models.Entry.findAll({
+    where: {
+      state: req.body.state
+    }
+  }).then(entries => {
+    let entryData = [];
+    entries.forEach(entry => {
+      entryData.push(entry.get({ plain: true }));
+    });
+    return res.render("dashboard", { entries: entryData });
+  });
+});
+
+
+// Create a new entry
+/*router.post("/dashboard", (req, res, next) => {
   models.Entry.create({
     id: entry.id,
           name: entry.name,
@@ -69,6 +87,8 @@ router.post("/dashboard", (req, res, next) => {
     });
   });
 });
+
+*/
 
 // Render the edit post page
 router.get("/:slug/edit", (req, res, next) => {
@@ -96,11 +116,10 @@ router.get("/:slug/edit", (req, res, next) => {
 });
 
 // Update a entry
-router.post("/:slug/edit", (req, res, next) => {
+router.post("/:id/edit", (req, res, next) => {
   models.Entry.findOne({
     where: {
-      slug: req.params.slug,
-      authorId: 1
+      id: req.params.id,
     }
   }).then(entry => {
     if (!entry) {
@@ -126,33 +145,12 @@ router.post("/:slug/edit", (req, res, next) => {
   });
 });
 
-// Delete a entry
-router.post("/:slug/delete", (req, res, next) => {
-  models.Entry.findOne({
-    where: {
-      slug: req.params.slug,
-      authorId: 1
-    }
-  }).then(entry => {
-    if (!entry) {
-      return res.render("error", {
-        message: "Page not found.",
-        error: {
-          status: 404,
-        }
-      });
-    }
-
-    entry.destroy();
-    res.redirect("/dashboard");
-  });
-});
 
 // View a entry
 router.get("/:id", (req, res, next) => {
   models.Entry.findOne({
     where: {
-      slug: req.params.id
+      id: req.params.id
     }
   }).then(entry => {
     if (!entry) {
