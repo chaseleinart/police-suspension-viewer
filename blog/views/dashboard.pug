@@ -5,15 +5,6 @@ block variables
 
 block content
   .row
-    .offset-sm-2.col-sm-8
-      form(method="post")
-        .form-group
-          label(for="state") State
-          input.form-control#title(type="text", name="state", placeholder="State", required)
-          button.btn.btn-primary.submit-btn(type="submit") Submit
-
-
-  .row
     .col-sm-6
       form(method="post")
         .form-group
@@ -74,25 +65,26 @@ block content
               option(value='West Virginia') WV
               option(value='Wisconsin') WI
               option(value='Wyoming') WY
+  
             button.btn.btn-primary.submit-btn(type="submit") Submit
   .row
     table(style='width:100%', border='1')
-      tr
-        th name
-        th state
-        th agency
-        th yearDecertified
-        th source
-      each entry in entries
         tr
-            td 
-              a(entry.name, name=entry.name)= entry.name
-            td
-              a(entry.state, state=entry.state)= entry.state
-            td 
-              a(entry.agency, name=entry.agency)= entry.agency
-            td 
-              a(entry.year_decertified, state=entry.year_decertified)= entry.year_decertified
-            td 
-              a(href=entry.source, source=entry.source)= entry.source
+          th name
+          th state
+          th agency
+          th yearDecertified
+          th source
+        each entry in entries
+          tr
+              td 
+                a(entry.name, name=entry.name)= entry.name
+              td
+                a(entry.state, state=entry.state)= entry.state
+              td 
+                a(entry.agency, name=entry.agency)= entry.agency
+              td 
+                a(entry.year_decertified, state=entry.year_decertified)= entry.year_decertified
+              td 
+                a(href=entry.source, source=entry.source)= entry.source
 

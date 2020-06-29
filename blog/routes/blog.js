@@ -23,6 +23,7 @@ router.get("/", (req, res) => {
           state: entry.state,
           agency: entry.agency,
           source: entry.year_decertified,
+          year_decertified: entry.year_decertified,
           createdAt: entry.createdAt,
           updatedAt: entry.updatedAt,  
         });
@@ -37,8 +38,9 @@ router.get("/", (req, res) => {
 router.get("/dashboard", (req, res, next) => {
   models.Entry.findAll({
     where: {
-      state: "New Hampshire"
-    }
+      state: "New Hampshire"     
+    },
+    order: [['year_decertified', 'DESC']]
   }).then(entries => {
     let entryData = [];
     entries.forEach(entry => {
@@ -51,8 +53,9 @@ router.get("/dashboard", (req, res, next) => {
 router.post("/dashboard", (req, res, next) => {
   models.Entry.findAll({
     where: {
-      state: req.body.state
-    }
+      state: req.body.state 
+    },
+    order: [['year_decertified', 'DESC']]
   }).then(entries => {
     let entryData = [];
     entries.forEach(entry => {
