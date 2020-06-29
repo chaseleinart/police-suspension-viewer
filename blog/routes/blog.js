@@ -55,7 +55,7 @@ router.post("/dashboard", (req, res, next) => {
     where: {
       state: req.body.state 
     },
-    order: [['year_decertified', 'DESC']]
+    order: [['year_decertified', req.body.order]]
   }).then(entries => {
     let entryData = [];
     entries.forEach(entry => {

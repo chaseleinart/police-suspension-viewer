@@ -65,8 +65,17 @@ block content
               option(value='West Virginia') WV
               option(value='Wisconsin') WI
               option(value='Wyoming') WY
-  
+          .form-group
+            label(for='order')
+              | Order
+              span.asteriskField *
+            .col-xs-12
+              select(name='order')
+                option(value='DESC') Descending 
+                option(value='ASC') Ascending
+    
             button.btn.btn-primary.submit-btn(type="submit") Submit
+        br
   .row
     table(style='width:100%', border='1')
         tr
