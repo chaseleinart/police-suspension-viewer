@@ -10,6 +10,7 @@ const router = express.Router();
 // Only let the user access the route if they are authenticated.
 
 // Render the home page and list all blog posts
+/*
 router.get("/", (req, res) => {
   models.Entry.findAll({
     order: sequelize.literal("createdAt DESC")
@@ -33,9 +34,10 @@ router.get("/", (req, res) => {
     });
   });
 
+  */
 
 // Render the user dashboard
-router.get("/dashboard", (req, res, next) => {
+router.get("/", (req, res, next) => {
   models.Entry.findAll({
     where: {
       state: "New Hampshire"     
